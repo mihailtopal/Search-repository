@@ -39,7 +39,7 @@ export const reposAPI = createApi({
       headers.set("Content-Type", "application/json");
       headers.set(
         "Authorization",
-        "Bearer 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"
+        `Bearer ${process.env.REACT_APP_GITHUB_TOKEN}`
       );
       return headers;
     },
