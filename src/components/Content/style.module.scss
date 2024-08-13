@@ -1,25 +1,37 @@
+$font-family: Roboto, sans-serif;
+$font-color: rgba(79, 79, 79, 1);
+$title-color: rgba(0, 0, 0, 0.87);
+$font-size-large: 48px;
+$font-size-medium: 46px;
+$font-weight-normal: 400;
+$media-max-width-large: 1400px;
+$media-max-width-medium: 800px;
+$media-max-width-small: 650px;
+
 .content {
   width: 100%;
+
   .welcome {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100%;
-    font-family: Roboto;
-    font-size: 46px;
-    font-weight: 400;
-    color: rgba(79, 79, 79, 1);
-    @media (max-width: 1400px) {
+    font-family: $font-family;
+    font-size: $font-size-medium;
+    font-weight: $font-weight-normal;
+    color: $font-color;
+
+    @media (max-width: $media-max-width-large) {
       font-size: 36px;
     }
   }
+
   .searchContent {
     height: 100%;
     display: grid;
     grid-template-columns: 2fr 1fr;
 
-    @media (max-width: 800px) {
-      display: grid;
+    @media (max-width: $media-max-width-medium) {
       grid-template-columns: 1fr;
     }
 
@@ -28,23 +40,29 @@
       margin-left: 32px;
       position: relative;
 
-      @media (max-width: 650px) {
+      @media (max-width: $media-max-width-small) {
         margin-left: 12px;
       }
 
       .searhTitle {
-        color: rgba(0, 0, 0, 0.87);
-        font-family: Roboto;
-        font-size: 48px;
-        font-weight: 400;
-        margin: 24px 24px 24px 0px;
-        @media (max-width: 1400px) {
+        color: $title-color;
+        font-family: $font-family;
+        font-size: $font-size-large;
+        font-weight: $font-weight-normal;
+        margin: 24px 0;
+
+        @media (max-width: $media-max-width-large) {
           font-size: calc(2vw + 20px);
         }
       }
     }
   }
 }
+
 .infoBlockInDialog {
   height: 100%;
+}
+
+.modal {
+  font-family: $font-family;
 }

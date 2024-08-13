@@ -1,95 +1,119 @@
+$font-family: Roboto, sans-serif;
+$background-light: rgba(242, 242, 242, 1);
+$font-size-base: 14px;
+$font-size-small: 13px;
+$font-size-large: 32px;
+$font-weight-normal: 400;
+$font-weight-bold: 700;
+$line-height-base: 20px;
+$line-height-small: 18px;
+$padding-small: 3px 10px;
+$padding-medium: 7px 10px;
+$padding-large: 24px 16px 16px 0px;
+$margin-medium: 24px;
+$margin-small: 8px;
+$margin-right: 32px;
+
 .infoBlock {
   padding-left: 24px;
   height: 100%;
-  background: rgba(242, 242, 242, 1);
+  background: $background-light;
 
   .languages {
     flex-wrap: wrap;
     display: flex;
     margin-right: 20px;
   }
+
   .lang {
-    margin-top: 8px;
-    margin-right: 8px;
+    margin-top: $margin-small;
+    margin-right: $margin-small;
     width: max-content;
-    padding: 3px 10px;
-    background-color: #00000014;
-    color: #000000de;
+    padding: $padding-small;
+    background-color: rgba(0, 0, 0, 0.14);
+    color: rgba(0, 0, 0, 0.87);
     border-radius: 100px;
-    font-family: Roboto;
-    font-size: 13px;
-    font-weight: 400;
-    line-height: 18px;
+    font-family: $font-family;
+    font-size: $font-size-small;
+    font-weight: $font-weight-normal;
+    line-height: $line-height-small;
     letter-spacing: 0.16px;
     text-align: left;
   }
 
   .license,
   .description {
-    margin-top: 24px;
-    margin-right: 32px;
-    font-family: Roboto;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 20px;
+    margin-top: $margin-medium;
+    margin-right: $margin-right;
+    font-family: $font-family;
+    font-size: $font-size-base;
+    font-weight: $font-weight-normal;
+    line-height: $line-height-base;
     letter-spacing: 0.17px;
     text-align: left;
+
     div {
       margin-top: 16px;
     }
+
     span {
-      font-weight: 700;
+      font-weight: $font-weight-bold;
     }
   }
 
   .primeInfo {
     display: flex;
     justify-content: space-between;
-    margin-right: 32px;
+    margin-right: $margin-right;
     align-items: center;
-    margin-bottom: 8px;
+    margin-bottom: $margin-small;
+
     .primeLang {
       margin-top: 0;
-
-      padding: 7px 10px;
+      padding: $padding-medium;
       background-color: #2196f3;
       color: #ffffff;
     }
+
     .stars {
       display: flex;
       align-items: center;
+
       .starsCount {
-        font-family: Roboto;
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 20px;
+        font-family: $font-family;
+        font-size: $font-size-base;
+        font-weight: $font-weight-normal;
+        line-height: $line-height-base;
         letter-spacing: 0.17px;
         text-align: left;
       }
     }
   }
+
   .infoTitle {
     word-break: break-all;
     margin: 0;
-    padding: 24px 16px 16px 0px;
-    font-family: Roboto;
-    font-size: 32px;
-    font-weight: 400;
+    padding: $padding-large;
+    font-family: $font-family;
+    font-size: $font-size-large;
+    font-weight: $font-weight-normal;
     text-align: left;
+
     @media (max-width: 1400px) {
       font-size: calc(1vw + 16px);
     }
   }
 }
+
 .pickRep {
-  background: rgba(242, 242, 242, 1);
+  background: $background-light;
   overflow-wrap: break-word;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: Roboto;
-  font-size: 14px;
-  font-weight: 400;
+  font-family: $font-family;
+  font-size: $font-size-base;
+  font-weight: $font-weight-normal;
   color: rgba(79, 79, 79, 1);
 }

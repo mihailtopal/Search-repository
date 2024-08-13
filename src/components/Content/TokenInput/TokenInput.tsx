@@ -12,6 +12,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useState } from "react";
 import { saveToken } from "../../../api/tokenService";
+import style from "../style.module.scss";
 
 // Создаем стилизованный компонент Dialog с использованием темы Material-UI
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -45,7 +46,11 @@ const TokenInput = () => {
   return (
     <>
       {/* Диалог для ввода токена */}
-      <BootstrapDialog aria-labelledby="customized-dialog-title" open={open}>
+      <BootstrapDialog
+        aria-labelledby="customized-dialog-title"
+        open={open}
+        className={style.modal}
+      >
         <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
           Введите токен GitHub
         </DialogTitle>
