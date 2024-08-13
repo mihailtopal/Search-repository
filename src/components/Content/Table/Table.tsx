@@ -1,12 +1,12 @@
 import { FC, useEffect, useState } from "react";
-import style from "../style.module.scss";
+import style from "./style.module.scss";
 import TablePagination from "@mui/material/TablePagination";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { SerializedError } from "@reduxjs/toolkit";
-import TableHeader, { Direction } from "./TableHeader";
+import TableHeader, { Direction, SortTarget } from "./TableHeader";
 import TableBody from "./TableBody";
 
-// типизация элементов в массиве
+// Типизация элементов таблицы
 export interface IItem {
   name: string;
   description: string;
@@ -17,6 +17,7 @@ export interface IItem {
   primaryLanguage: string | undefined;
   licenseInfo: string | undefined;
 }
+
 interface ITableProps {
   items: IItem[] | undefined;
   error: FetchBaseQueryError | SerializedError | undefined;
@@ -24,9 +25,10 @@ interface ITableProps {
   setTargetItem: (arg: IItem | null) => void;
   handleClickOpen: () => void;
 }
-// тип для объекта фильтрации
+
+// Тип для объекта фильтрации (сортировка по параметру и направлению)
 export type FilterParametr = {
-  target: "forkCount" | "stargazerCount" | "updatedAt" | null;
+  target: SortTarget | null;
   direction: Direction | null;
 };
 
@@ -37,27 +39,26 @@ const Table: FC<ITableProps> = ({
   setTargetItem,
   handleClickOpen,
 }) => {
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [itemsData, setItemsData] = useState<IItem[]>();
-  const [filteredItems, setFilteredItems] = useState<IItem[]>();
+  const [page, setPage] = useState(0); // Текущая страница
+  const [rowsPerPage, setRowsPerPage] = useState(10); // Количество строк на странице
+  const [itemsData, setItemsData] = useState<IItem[]>(); // Данные для таблицы
+  const [filteredItems, setFilteredItems] = useState<IItem[]>(); // Отфильтрованные данные
   const [sortParametr, setSortParametr] = useState<FilterParametr>({
     target: null,
     direction: null,
-  });
+  }); // Параметры сортировки
 
+  // Обновляем данные таблицы при изменении props.items
   useEffect(() => {
     setItemsData(items);
   }, [items]);
 
-  //  задаем в фильтрованный массив нужное количество элементов
-  //  в нашем случае изначально их 10, но при изменении rowsPerPage
-  //  будет меняться количество строк в таблице
+  // Обновляем количество отображаемых элементов на странице при изменении rowsPerPage
   useEffect(() => {
     setFilteredItems(itemsData?.slice(0, rowsPerPage));
   }, [itemsData, rowsPerPage]);
 
-  // сортировка по направлению и типу (звезды,форки, дата)
+  // Сортировка данных по выбранному параметру и направлению
   useEffect(() => {
     const { target, direction } = sortParametr;
     if (target && itemsData) {
@@ -74,12 +75,12 @@ const Table: FC<ITableProps> = ({
         else return bValue - aValue;
       });
       setItemsData(sortedItems);
-      setFilteredItems(itemsData.slice(0, rowsPerPage));
-      setPage(0);
+      setFilteredItems(sortedItems.slice(0, rowsPerPage)); // Обновляем отображаемые элементы после сортировки
+      setPage(0); // Сбрасываем страницу на 0 при сортировке
     }
   }, [rowsPerPage, sortParametr]);
 
-  // изменении страницы
+  // Обработка изменения страницы
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
     newPage: number
@@ -92,18 +93,21 @@ const Table: FC<ITableProps> = ({
       )
     );
   };
-  // изменение количества строк в таблице
+
+  // Обработка изменения количества строк на странице
   const handleChangeRowsPerPage = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
+    setPage(0); // Сбрасываем страницу на 0 при изменении количества строк
   };
 
   return (
     <div className={style.searchTable}>
       <table>
+        {/* Заголовок таблицы */}
         <TableHeader setSortParametr={setSortParametr} />
+        {/* Тело таблицы с данными */}
         <TableBody
           setTargetItem={setTargetItem}
           isFetching={isFetching}
@@ -112,6 +116,7 @@ const Table: FC<ITableProps> = ({
           handleClickOpen={handleClickOpen}
         />
       </table>
+      {/* Пагинация для управления страницами и количеством строк на странице */}
       <TablePagination
         className={style.pagination}
         component="div"

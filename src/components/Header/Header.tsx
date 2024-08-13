@@ -1,12 +1,13 @@
 import { FC } from "react";
 import SearchComponent from "./SearchComponent";
 import style from "./style.module.scss";
-import { IItem } from "../Content/SearchResults/Table";
+import { IItem } from "../Content/Table/Table";
 
 export interface IHeaderProps {
   setSearchText: (text: string) => void;
   setTargetItem: (arg: IItem | null) => void;
 }
+// Хедер
 const Header: FC<IHeaderProps> = ({ setSearchText, setTargetItem }) => {
   return (
     <div className={style.header}>

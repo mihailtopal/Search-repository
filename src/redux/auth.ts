@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export interface IProfile {
-  hasToken: boolean;
+// Интерфейс для состояния аутентификации
+export interface IAuth {
+  hasToken: boolean; // Наличие токена
 }
 
-let initialState: IProfile = {
-  hasToken: false,
+let initialState: IAuth = {
+  hasToken: false, // Начальное состояние: токен отсутствует
 };
 
 const authSlice = createSlice({
@@ -13,12 +14,13 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     setToken: (state) => {
-      state.hasToken = true;
+      state.hasToken = true; // Установка флага наличия токена
     },
     removeToken: (state) => {
-      state.hasToken = false;
+      state.hasToken = false; // Удаление токена
     },
   },
 });
+// Экспорт действий и редюсеров для использования в приложении
 export const { setToken, removeToken } = authSlice.actions;
 export default authSlice.reducer;

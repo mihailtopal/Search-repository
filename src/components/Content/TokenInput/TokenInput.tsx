@@ -13,6 +13,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useState } from "react";
 import { saveToken } from "../../../api/tokenService";
 
+// Создаем стилизованный компонент Dialog с использованием темы Material-UI
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
@@ -22,29 +23,29 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
+// Компонент для ввода и сохранения токена GitHub
 const TokenInput = () => {
+  // Локальное состояние для управления открытием диалога и значением токена
   const [open, setOpen] = useState<boolean>(true);
   const [tokenValue, setTokenValue] = useState<string>("");
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  // Функция для обработки сохранения токена
   const handleSaveToken = () => {
+    // Проверка длины токена
     if (tokenValue.length < 40) {
       alert("Ошибка. Длинна токена должна составлять 40 символов.");
     } else {
+      // Сохранение токена и закрытие диалога
       saveToken(tokenValue);
       setOpen(false);
       setTokenValue("");
     }
   };
+
   return (
     <>
-      <BootstrapDialog
-        onClose={handleClose}
-        aria-labelledby="customized-dialog-title"
-        open={open}
-      >
+      {/* Диалог для ввода токена */}
+      <BootstrapDialog aria-labelledby="customized-dialog-title" open={open}>
         <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
           Введите токен GitHub
         </DialogTitle>
@@ -56,6 +57,7 @@ const TokenInput = () => {
             выполнения операций, таких как поиск репозиториев, получение
             информации о них и т.д.
           </Typography>
+          {/* Аккордеон с информацией о безопасности */}
           <Accordion>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -72,6 +74,7 @@ const TokenInput = () => {
               </Typography>
             </AccordionDetails>
           </Accordion>
+          {/* Аккордеон с инструкцией по получению токена */}
           <Accordion>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -125,4 +128,5 @@ const TokenInput = () => {
     </>
   );
 };
+
 export default TokenInput;
