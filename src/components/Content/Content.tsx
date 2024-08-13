@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import { useGetReposQuery } from "../../api/api";
 import InfoBlock from "./InfoBlock/InfoBlock";
 import style from "./style.module.scss";
-import Welcom from "./Welcom";
+import Welcome from "./Welcome";
 import Table, { IItem } from "./Table/Table";
 import Dialog from "@mui/material/Dialog";
 import IconButton from "@mui/material/IconButton";
@@ -58,7 +58,7 @@ export const Content: FC<IContentProps> = ({
     <div className={style.content}>
       {!searchText ? (
         // Если нет текста поиска, показываем приветственное сообщение
-        <Welcom />
+        <Welcome />
       ) : (
         <div className={style.searchContent}>
           <div className={style.searhContainer}>
