@@ -45,6 +45,9 @@
     line-height: 20px;
     letter-spacing: 0.17px;
     text-align: left;
+    div {
+      margin-top: 16px;
+    }
     span {
       font-weight: 700;
     }
@@ -77,6 +80,7 @@
     }
   }
   .infoTitle {
+    word-break: break-all;
     margin: 0;
     padding: 24px 16px 16px 0px;
     font-family: Roboto;

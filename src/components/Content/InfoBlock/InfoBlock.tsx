@@ -11,7 +11,6 @@ const InfoBlock: FC<IInfoBlockProps> = ({ item }) => {
   );
   return (
     <div className={style.infoBlock}>
-      
       {!item ? (
         <div className={style.pickRep}>Выберите репозитарий</div>
       ) : (
@@ -35,11 +34,11 @@ const InfoBlock: FC<IInfoBlockProps> = ({ item }) => {
           </div>
           <div className={style.description}>
             <span>Описание:&nbsp;</span>
-            {item.description || "Описание не указано"}
+            <div> {item.description || "Описание не указано"}</div>
           </div>
           <div className={style.license}>
             <span> Лицензия:&nbsp;</span>
-            {item.licenseInfo || "Лицензия не указана"}
+            <div>{item.licenseInfo || "Лицензия не указана"}</div>
           </div>
         </div>
       )}

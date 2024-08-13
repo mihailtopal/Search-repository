@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useGetReposQuery } from "../../api/api";
 import InfoBlock from "./InfoBlock/InfoBlock";
 import style from "./style.module.scss";
@@ -7,6 +7,10 @@ import Table, { IItem } from "./SearchResults/Table";
 import Dialog from "@mui/material/Dialog";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
+
+import TokenInput from "./TokenInput/TokenInput";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
 interface IContentProps {
   searchText: string;
@@ -23,6 +27,7 @@ export const Content: FC<IContentProps> = ({
     first: 100,
     after: null,
   });
+  const hasToken = useSelector((state: RootState) => state.auth.hasToken);
   const [open, setOpen] = useState(false);
   const screenWidth = window.innerWidth;
   const handleClickOpen = () => {
@@ -32,6 +37,10 @@ export const Content: FC<IContentProps> = ({
   const handleClose = () => {
     setOpen(false);
   };
+
+  if (!hasToken) {
+    return <TokenInput />;
+  }
 
   return (
     <div className={style.content}>

@@ -141,8 +141,8 @@
         .loading {
           &:hover {
             tr {
-              background-color: initial; /* Убираем фон на ховер */
-              color: initial; /* Убираем изменение цвета текста */
+              background-color: initial;
+              color: initial;
             }
           }
           position: relative;
@@ -168,6 +168,13 @@
         .notFound {
           position: relative;
 
+          &:hover {
+            tr {
+              background-color: initial;
+              color: initial;
+              cursor: auto;
+            }
+          }
           tr {
             margin-top: 20px;
             font-family: Roboto;

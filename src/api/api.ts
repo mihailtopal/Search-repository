@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import Cookies from "js-cookie";
 
 export interface IEdges {
   node: {
@@ -31,16 +32,16 @@ export interface IResponse {
   };
 }
 
+// Функция для получения токена из куки
+const getToken = () => Cookies.get("github_token");
+
 export const reposAPI = createApi({
   reducerPath: "reposAPI",
   tagTypes: ["Repos"],
   baseQuery: fetchBaseQuery({
     prepareHeaders: (headers) => {
       headers.set("Content-Type", "application/json");
-      headers.set(
-        "Authorization",
-        `Bearer ${process.env.REACT_APP_GITHUB_TOKEN}`
-      );
+      headers.set("Authorization", `Bearer ${getToken()}`);
       return headers;
     },
     baseUrl: "https://api.github.com/graphql",
