@@ -1,36 +1,18 @@
 import { FC, useEffect, useState } from "react";
 import style from "./style.module.scss";
 import TablePagination from "@mui/material/TablePagination";
-import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
-import { SerializedError } from "@reduxjs/toolkit";
-import TableHeader, { Direction, SortTarget } from "./TableHeader";
+import TableHeader from "./TableHeader";
 import TableBody from "./TableBody";
+import { FilterParametr, IItem } from "../../../types/types";
 
-// Типизация элементов таблицы
-export interface IItem {
-  name: string;
-  description: string;
-  stargazerCount: number;
-  forkCount: number;
-  updatedAt: string;
-  languages: Array<string>;
-  primaryLanguage: string | undefined;
-  licenseInfo: string | undefined;
-}
-
+// типизация пропсов
 interface ITableProps {
   items: IItem[] | undefined;
-  error: FetchBaseQueryError | SerializedError | undefined;
+  error: Error | null;
   isFetching: boolean;
   setTargetItem: (arg: IItem | null) => void;
   handleClickOpen: () => void;
 }
-
-// Тип для объекта фильтрации (сортировка по параметру и направлению)
-export type FilterParametr = {
-  target: SortTarget | null;
-  direction: Direction | null;
-};
 
 const Table: FC<ITableProps> = ({
   items,

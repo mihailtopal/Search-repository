@@ -1,7 +1,7 @@
 import { FC } from "react";
 import style from "./style.module.scss";
 import StarRateIcon from "@mui/icons-material/StarRate";
-import { IItem } from "../Table/Table";
+import { IItem } from "../../../types/types";
 
 // Интерфейс для пропсов компонента
 interface IInfoBlockProps {

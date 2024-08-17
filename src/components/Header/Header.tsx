@@ -1,7 +1,7 @@
 import { FC } from "react";
 import SearchComponent from "./SearchComponent";
 import style from "./style.module.scss";
-import { IItem } from "../Content/Table/Table";
+import { IItem } from "../../types/types";
 
 export interface IHeaderProps {
   setSearchText: (text: string) => void;

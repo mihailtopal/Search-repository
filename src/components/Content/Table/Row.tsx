@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { IItem } from "./Table";
+import { IItem } from "../../../types/types";
 
 interface IRowProps {
   item: IItem;

@@ -2,10 +2,9 @@ import { FC } from "react";
 import style from "./style.module.scss";
 import Row from "./Row";
 import Skeleton from "@mui/material/Skeleton";
-import { IItem } from "./Table";
 import Button from "@mui/material/Button";
-import { useDispatch } from "../../../redux/hooks";
-import { removeToken } from "../../../redux/auth";
+import { useAuthStore } from "../../../store/store";
+import { IItem } from "../../../types/types";
 
 interface ITableBodyProps {
   isFetching: boolean;
@@ -22,7 +21,7 @@ const TableBody: FC<ITableBodyProps> = ({
   setTargetItem,
   handleClickOpen,
 }) => {
-  const dispatch = useDispatch();
+  const removeToken = useAuthStore((state) => state.removeToken); // Функция переключения состояния наличия токена на false
 
   // Функции для отображения разных состояний таблицы
   const renderLoadingState = () => (
@@ -45,7 +44,7 @@ const TableBody: FC<ITableBodyProps> = ({
         имеет ошибку. Пожалуйста, попробуйте ввести токен ещё раз. Убедитесь,
         что он действителен и не содержит ошибок.
         <tr>
-          <Button variant="contained" onClick={() => dispatch(removeToken())}>
+          <Button variant="contained" onClick={() => removeToken()}>
             Ввести токен
           </Button>
         </tr>

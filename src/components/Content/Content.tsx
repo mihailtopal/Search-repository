@@ -1,15 +1,15 @@
 import { FC, useState } from "react";
-import { useGetReposQuery } from "../../api/api";
 import InfoBlock from "./InfoBlock/InfoBlock";
 import style from "./style.module.scss";
 import Welcome from "./Welcome";
-import Table, { IItem } from "./Table/Table";
 import Dialog from "@mui/material/Dialog";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import TokenInput from "./TokenInput/TokenInput";
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
+import { useFetchRepositories } from "../../hooks/useFetchRepositoryies";
+import { useAuthStore } from "../../store/store";
+import { IItem } from "../../types/types";
+import Table from "./Table/Table";
 
 interface IContentProps {
   searchText: string;
@@ -24,14 +24,11 @@ export const Content: FC<IContentProps> = ({
   setTargetItem, // Функция для установки выбранного элемента
 }) => {
   // Хук для получения данных репозиториев
-  const { data, error, isFetching } = useGetReposQuery({
-    query: searchText,
-    first: 100,
-    after: null,
-  });
+
+  const { data, error, isFetching } = useFetchRepositories(searchText);
 
   // Получение состояния наличия токена из Redux
-  const hasToken = useSelector((state: RootState) => state.auth.hasToken);
+  const hasToken = useAuthStore((state) => state.hasToken);
 
   // Локальное состояние для управления открытием/закрытием диалога
   const [open, setOpen] = useState(false);
@@ -39,12 +36,12 @@ export const Content: FC<IContentProps> = ({
   // Ширина экрана для адаптивного отображения
   const screenWidth = window.innerWidth;
 
-  // Обработчик открытия диалога
+  // Обработчик открытия диалогового окна
   const handleClickOpen = () => {
     setOpen(true);
   };
 
-  // Обработчик закрытия диалога
+  // Обработчик закрытия диалогового окна
   const handleClose = () => {
     setOpen(false);
   };

@@ -1,31 +1,17 @@
 import { FC, useState } from "react";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import { FilterParametr } from "./Table";
-
-// Типизация возможных направлений сортировки
-export type Direction = "up" | "down" | null;
-
-// Типизация целей сортировки
-export type SortTarget = "forkCount" | "stargazerCount" | "updatedAt";
-
-// Типизация состояния сортировки
-interface SortState {
-  forkCount: Direction;
-  stargazerCount: Direction;
-  updatedAt: Direction;
-}
+import {
+  FilterParametr,
+  HeaderItem,
+  SortState,
+  SortTarget,
+} from "../../../types/types";
 
 // Типизация пропсов компонента
 interface ITableHeaderProps {
   setSortParametr: (arg: FilterParametr) => void;
 }
-
-// Типизация элементов headersItems
-type HeaderItem = {
-  key: SortTarget;
-  label: string;
-};
 
 const TableHeader: FC<ITableHeaderProps> = ({ setSortParametr }) => {
   // Состояние для направления сортировки по столбцам

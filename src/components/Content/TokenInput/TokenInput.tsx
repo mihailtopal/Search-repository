@@ -11,7 +11,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useState } from "react";
-import { saveToken } from "../../../api/tokenService";
+import { saveToken } from "../../../services/tokenService";
 import style from "../style.module.scss";
 
 // Создаем стилизованный компонент Dialog с использованием темы Material-UI
